@@ -1,10 +1,9 @@
 import os
+from io import BytesIO
+from urllib.parse import quote
 
 import boto3
-from io import BytesIO
-
 from fastapi.responses import StreamingResponse
-from urllib.parse import quote
 
 
 def get_file_object(bucket_name: str, file_path: str):
