@@ -1,0 +1,8 @@
+version: '2'
+services:
+
+  ws_lib:
+    build: .
+    container_name: ws_lib
+    ports:
+      - "8000:8000"
