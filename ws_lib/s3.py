@@ -19,6 +19,11 @@ def get_file_object(bucket_name: str, file_path: str):
     return files[0]
 
 
+def get_file_e_tag(bucket_name: str, file_path: str):
+    file = get_file_object(bucket_name, file_path)
+    return file.e_tag.replace("\"", "")
+
+
 def stream_file_from_s3(bucket_name: str, file_path: str):
     file_object = get_file_object(bucket_name=bucket_name, file_path=file_path)
     content = file_object.get()['Body'].read()
