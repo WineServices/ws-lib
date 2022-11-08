@@ -24,7 +24,7 @@ def get_file_e_tag(bucket_name: str, file_path: str):
     return file.e_tag.replace("\"", "")
 
 
-def upload_to_s3(bucket_name: str, file_path: str, file_content: BytesIO) -> None:
+def upload_to_s3(bucket_name: str, file_path: str, file_content: bytes) -> None:
     s3_client = boto3.client(
         "s3",
         aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
