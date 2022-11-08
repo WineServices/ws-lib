@@ -30,7 +30,6 @@ def upload_to_s3(bucket_name: str, file_path: str, file_content: BytesIO) -> Non
         aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
         aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"]
     )
-    file_content = file_content.read()
     s3_client.put_object(Body=file_content, Bucket=bucket_name, Key=file_path)
 
 
