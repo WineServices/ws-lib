@@ -24,6 +24,16 @@ def get_file_e_tag(bucket_name: str, file_path: str):
     return file.e_tag.replace("\"", "")
 
 
+def upload_to_s3(bucket_name: str, file_path: str, file_content: BytesIO) -> None:
+    s3_client = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
+        aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"]
+    )
+    file_content = file_content.read()
+    s3_client.put_object(Body=file_content, Bucket=bucket_name, Key=file_path)
+
+
 def stream_file_from_s3(bucket_name: str, file_path: str):
     file_object = get_file_object(bucket_name=bucket_name, file_path=file_path)
     content = file_object.get()['Body'].read()
