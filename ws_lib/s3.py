@@ -51,4 +51,5 @@ def stream_file_from_s3(bucket_name: str, file_path: str):
         content_disposition = f'attachment; filename="{file_name}"'
 
     response.headers["Content-Disposition"] = content_disposition
+    response.headers["Access-Control-Expose-Headers"] = 'Content-Disposition'
     return response
