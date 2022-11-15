@@ -46,7 +46,10 @@ def stream_file_from_s3(bucket_name: str, file_path: str):
     content_disposition_filename = quote(file_name)
     if content_disposition_filename != file_name:
         content_disposition_filename_ascii = unidecode.unidecode(file_name)
-        content_disposition = f"attachment; filename*=utf-8''{content_disposition_filename}; filename=\"{content_disposition_filename_ascii}\""
+        content_disposition = "attachment; filename*=utf-8''{}; filename=\"{}\"".format(
+            content_disposition_filename,
+            content_disposition_filename_ascii
+        )
     else:
         content_disposition = f'attachment; filename="{file_name}"'
 
