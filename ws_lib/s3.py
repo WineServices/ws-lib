@@ -1,9 +1,9 @@
 import os
-import unidecode
 from io import BytesIO
 from urllib.parse import quote
 
 import boto3
+import unidecode
 from fastapi.responses import StreamingResponse
 
 
