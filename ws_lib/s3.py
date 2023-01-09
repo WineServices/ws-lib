@@ -36,11 +36,13 @@ def upload_to_s3(bucket_name: str, file_path: str, file_content: bytes) -> None:
 
 def stream_file_from_s3(bucket_name: str, file_path: str):
     file_object = get_file_object(bucket_name=bucket_name, file_path=file_path)
+    print("file object is found")
     content = file_object.get()['Body'].read()
-
+    print("file content is read")
     stream = BytesIO(content)
-
+    print("in bytes io")
     response = StreamingResponse(iter([stream.getvalue()]))
+    print("steraming response")
     file_name = file_path.split("/")[-1]
 
     content_disposition_filename = quote(file_name)
