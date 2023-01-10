@@ -72,4 +72,3 @@ def get_file_url(bucket_name: str, file_path: str):
         }
     )
     return signed_url
-
