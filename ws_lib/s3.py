@@ -58,3 +58,22 @@ def stream_file_from_s3(bucket_name: str, file_path: str):
     response.headers["Content-Disposition"] = content_disposition
     response.headers["Access-Control-Expose-Headers"] = 'Content-Disposition'
     return response
+
+
+def get_file_url(bucket_name: str, file_path: str):
+    # make sure file exists
+    get_file_object(bucket_name=bucket_name, file_path=file_path)
+    s3_client = boto3.client(
+        "s3",
+        aws_access_key_id=os.environ["AWS_ACCESS_KEY_ID"],
+        aws_secret_access_key=os.environ["AWS_SECRET_ACCESS_KEY"]
+    )
+    signed_url = s3_client.generate_presigned_url(
+        ClientMethod='get_object',
+        Params={
+            "Bucket": bucket_name,
+            "Key": file_path
+        }
+    )
+    return signed_url
+
